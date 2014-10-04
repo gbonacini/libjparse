@@ -1,0 +1,33 @@
+.TH LIBJPARSE 3 "SEPTEMBER 2014" Unix "User Manuals"                                  
+.SH NAME                                                                     
+getArrayOfObjsElements -- gets the elements of an array of objects
+.SH LIBRARY                                                                 
+.B Standard C Library (libjparse, -ljparse)
+.SH SYNOPSIS                                                                 
+.B      #include <parseJsonConfig.h>
+
+.B	node* getArrayOfObjsElements(node* arrayRootElement);
+.SH DESCRIPTION                                                              
+The getArrayOfObjsElements() function recursively gets the elements of an array of objects. The first call of this funtion must specify that array with the parameter
+.I arrayRootElement.
+The following calls of getArrayOfObjsElements() must specify 
+.I NULL
+as parameter to fetch the remaining elements (objects) of the array.
+.SH RETURN VALUES
+The getArrayOfObjsElements() function returns a pointer of the n-element of the array or NULL.
+A NULL value returned means that no more elements are available or that an error was present. In case of errors,
+the 
+.I errno 
+variable will contain one of the values:
+.I WRONG_NODE_TYPE
+.I WRONG_INITIAL_NODE
+.I UNHANDLED_NODE_TYPE
+.I NO_MORE_ELEMENTS
+.SH SEE ALSO                                                                  
+getElementValueByString(3), getArrayElements(3), getArrayOfObjsElements(3), getElementFromObj(3), isScalar(3), libjparse(3), parseJsonConfig(3)
+.SH STANDARDS
+Todo.
+.SH BUGS                                                                     
+This program is a beta, if some bugs are present, they will be removed in the stable relase.
+.SH AUTHOR                                                                   
+Gabriele Bonacini <g.random36@gmail.com>                            

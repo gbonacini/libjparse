@@ -1,0 +1,24 @@
+.TH LIBJPARSE 3 "SEPTEMBER 2014" Unix "User Manuals"                                  
+.SH NAME                                                                     
+isScalar -- checks if an element type is a unstructured data type
+.SH LIBRARY                                                                 
+.B Standard C Library (libjparse, -ljparse)
+.SH SYNOPSIS                                                                 
+.B      #include <parseJsonConfig.h>
+
+.B	bool isScalar(node* toCheck);
+
+.SH DESCRIPTION                                                              
+The function isScalar() checks if an element type is a unstructured data type (e.g. numeric, boolean, text). The parameter
+.I toCheck
+is a pointer to an element (node* ).
+.SH RETURN VALUES
+The isScalar() function returns true if the element specified is an unstructured data type (e.g. numeric, boolean, text), false if is a structured data type (e.g. array or object).
+.SH SEE ALSO                                                                  
+getElementValueByString(3), getArrayElements(3), getArrayOfObjsElements(3), getElementFromObj(3), isScalar(3), libjparse(3), parseJsonConfig(3)
+.SH STANDARDS
+Todo.
+.SH BUGS                                                                     
+This program is a beta, if some bugs are present, they will be removed in the stable relase.
+.SH AUTHOR                                                                   
+Gabriele Bonacini <g.random36@gmail.com>                            

@@ -1,0 +1,33 @@
+.TH LIBJPARSE 3 "SEPTEMBER 2014" Unix "User Manuals"                                  
+.SH NAME                                                                     
+getElementFromObj -- recursively gets the elements of an object.
+.SH LIBRARY                                                                 
+.B Standard C Library (libjparse, -ljparse)
+.SH SYNOPSIS                                                                 
+.B      #include <parseJsonConfig.h>
+
+.B	node* getElementFromObj(node* object); 
+.SH DESCRIPTION                                                              
+The function getElementFromObj() recursively gets the elements of an object. The first call of this funtion must specify that object with the parameter
+.I object.
+The following calls of getElementFromObj() must specify 
+.I NULL
+as parameter to fetch the remaining elements of the object.
+.SH RETURN VALUES
+The getElementFromObj() function returns a pointer of the n-element of the object or NULL.
+A NULL value returned means that no more elements are available or that an error was present. In case of errors,
+the
+.I errno
+variable will contain one of the values:
+.I WRONG_NODE_TYPE
+.I WRONG_INITIAL_NODE
+.I UNHANDLED_NODE_TYPE
+.I NO_MORE_ELEMENTS
+.SH SEE ALSO                                                                  
+getElementValueByString(3), getArrayElements(3), getArrayOfObjsElements(3), getElementFromObj(3), isScalar(3), libjparse(3), parseJsonConfig(3)
+.SH STANDARDS
+Todo.
+.SH BUGS                                                                     
+This program is a beta, if some bugs are present, they will be removed in the stable relase.
+.SH AUTHOR                                                                   
+Gabriele Bonacini <g.random36@gmail.com>                            

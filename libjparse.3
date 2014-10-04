@@ -1,0 +1,54 @@
+.TH LIBJPARSE 3 "SEPTEMBER 2014" Unix "User Manuals"                                  
+.SH NAME                                                                     
+libjparse \- Json Parsing Library
+.SH LIBRARY                                                                 
+.B Standard C Library (libjparse, -ljparse)
+.SH SYNOPSIS                                                                 
+.B      #include <parseJsonConfig.h>
+
+
+.SH DESCRIPTION                                                              
+.B libjparse                                                                       
+libjparse is a library to parse JSON data structs creating a indexed memory db.
+The memory structure is a tree of node elements:
+
+.TP
+.B struct node{
+.br
+.B   char* nodeName;
+.br
+.B   type nodeType;
+.br
+.B   configData data;
+.br
+.B   node* previousNode;
+.br
+.B   node* nextNode;
+.br
+.B   node* innerNode;
+.br
+.B   node* outerNode;
+.br
+.B   node* exitNode;
+.TP
+.B };
+
+.SH SEE ALSO                                                                  
+getElementValueByString(3), getArrayElements(3), getArrayOfObjsElements(3), getElementFromObj(3), isScalar(3), libjparse(3), parseJsonConfig(3)
+.SH STANDARDS
+Todo.
+.SH LIST OF FUNCTIONS
+.SS pathIndex* getElementValueByString(pathIndex* fullIndexesList, char* key);
+	gets an element using the index.
+.SS node* getArrayElements(node* arrayRootElement);
+	recursively gets the elements of an array of unstructured data type.
+.SS node* getArrayOfObjsElements(node* arrayRootElement);
+	recursively gets the elements of an array of objects.
+.SS node* getElementFromObj(node* arrayRootElement);
+	recursively gets the elements of an object.
+.SS bool isScalar(node* toCheck);
+	checks if an element type is a unstructured data type.
+.SH BUGS                                                                     
+This program is a beta, if some bugs are present, they will be removed in the stable relase.
+.SH AUTHOR                                                                   
+Gabriele Bonacini <g.random36@gmail.com>                            

@@ -1,0 +1,40 @@
+VERSION:="\"$(shell cat ../version)\""
+SHELLVERSION:="$(shell cat ../version)"
+BIN = parseJsonFile
+LINT = splint 
+VALGRIND = valgrind 
+EXPECT = expect
+PERL = perl
+SOURCES = ../src/json.c ../src/jsonGram.c ../src/parseJsonConfig.c
+SCRIPTS = testCasesScripts/testJsonData.exp testCasesScripts/testJsonAddr.pl
+TEST_FILE_A = jsons/sample.null.json
+
+.PHONY : all rebuild check tests  rebuild clean lint valgrind
+
+all:
+	check tests
+
+clean:
+	-rm -f *out
+
+rebuild: clean all 
+
+check: lint valgrind
+
+lint: ${SOURCES}
+	@echo " -------------- START LINT  -------------- "
+	@-for src in ${SOURCES}; do echo " -------------- $${src} -------------- " ; ($(LINT) -I../include -unrecog -compdestroy -nullassign -warnposix -nullpass -mustfreefresh -mustfreeonly $${src} 2>&1) > lint.out; done
+	@echo " -------------- STOP LINT  -------------- "
+
+valgrind: $(BIN)
+	@echo " -------------- START VALGRING  -------------- "
+	-rm -f valgrind.log
+	${VALGRIND} --leak-check=full --show-leak-kinds=all --log-file=valgrind.out ./$(BIN) -f$(TEST_FILE_A) -v root.menu.footer 
+	@echo " -------------- STOP VALGRING  -------------- "
+
+tests: $(SCRIPTS) $(TEST_FILE_A)
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.footer" "The End" "$(TEST_FILE_A)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.title" "SVG Viewer" "$(TEST_FILE_A)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.items.Object_Data_17.label" "View Source" "$(TEST_FILE_A)"
+	@ ./listAddresses $(TEST_FILE_A) 2>&1  | $(PERL) ./testCasesScripts/testJsonAddr.pl 
+	@./parseJsonFileMatrix -f"$(TEST_FILE_A)" -v"root.menu.items" 2>&1 | $(PERL) ./testCasesScripts/testJsonArray.pl 

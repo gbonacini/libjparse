@@ -1,0 +1,36 @@
+.TH LIBJPARSE 3 "SEPTEMBER 2014" Unix "User Manuals"                                  
+.SH NAME                                                                     
+getElementValueByString -- gets an element using the index
+.SH LIBRARY                                                                 
+.B Standard C Library (libjparse, -ljparse)
+.SH SYNOPSIS                                                                 
+.B      #include <parseJsonConfig.h>
+
+.B	pathIndex* getElementValueByString(pathIndex* fullIndexesList, char* key);
+.SH DESCRIPTION                                                              
+The function getElementValueByString()  gets an element using the index to avoid to seach in all the structure. The firts parameter
+.I fullIndexesList.
+is a pointer to that indexing structure. The
+.I key
+parameter is the key  search string starting from the root element (e.g. "root.menu.name").
+The indexing structure is a sorted array of pathIndex elements:
+
+.TP
+.B struct pathIndex{
+.br
+.B	char* fullNodeName;
+.br
+.B	node* Node;
+.TP
+.B };
+
+.SH RETURN VALUES
+The getElementValueByString() function returns a pointer of node of type pathIndex that contains a pointer to the node element needed or NULL.
+.SH SEE ALSO                                                                  
+getElementValueByString(3), getArrayElements(3), getArrayOfObjsElements(3), getElementFromObj(3), isScalar(3), libjparse(3), parseJsonConfig(3)
+.SH STANDARDS
+Todo.
+.SH BUGS                                                                     
+This program is a beta, if some bugs are present, they will be removed in the stable relase.
+.SH AUTHOR                                                                   
+Gabriele Bonacini <g.random36@gmail.com>                            
