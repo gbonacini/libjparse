@@ -9,17 +9,16 @@ SOURCES = ../src/json.c ../src/jsonGram.c ../src/parseJsonConfig.c
 SCRIPTS = testCasesScripts/testJsonData.exp testCasesScripts/testJsonAddr.pl
 TEST_FILE_A = jsons/sample.null.json
 
-.PHONY : all rebuild check tests  rebuild clean lint valgrind
+.PHONY: all rebuild static tests  rebuild clean lint valgrind
 
-all:
-	check tests
+all: static tests
 
 clean:
 	-rm -f *out
 
-rebuild: clean all 
+rebuild: clean all
 
-check: lint valgrind
+static: lint valgrind
 
 lint: ${SOURCES}
 	@echo " -------------- START LINT  -------------- "

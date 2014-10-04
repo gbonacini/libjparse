@@ -13,10 +13,13 @@ my $outerNode=17;
 my $exitNode=19;
 my $nullNode="0x0";
 
+my $SOp=qx/uname/;
+
 my $i=0;
 my @array = ();
 
-print STDERR "Tree Addresses\n";
+chomp($SOp);
+$nullNode="(nil)" if( $SOp eq "Linux");
 
 while (<>){
 	chomp();

@@ -75,7 +75,7 @@ case $host_os in
 			OPTIMIZATION=-O0
               fi
 	      if test "x$CC" = xgcc; then
-                    CFLAGS=" -g -Wextra -Wall \
+                    CFLAGS=" -g -Wextra -Wall  -std=c99 -D_XOPEN_SOURCE\
 			     -D_FORTIFY_SOURCE=2 ${OPTIMIZATION} -fstack-protector \
                              --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
                     LDFLAGS="$LDFLAGS -Wl,-z,relro"

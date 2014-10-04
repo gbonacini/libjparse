@@ -1,0 +1,15 @@
+all:
+	aclocal
+	autoheader
+	libtoolize 
+	automake -a 
+	autoreconf
+
+configure:
+	./configure
+
+clean:
+	rm -f ./aclocal.m4 ./config.log ./config.status ./configure ./include/config.h ./include/config.h.in ./include/config.h.in~ ./include/stamp-h1 ./include/y.tab.h ./libtool ./Makefile ./Makefile.in ./src/json.c ./src/jsonGram.h ./src/jsonGram.c ./src/lex.yy.c ./src/Makefile ./src/Makefile.in ./src/y.output ./src/y.tab.c ./test/Makefile ./test/Makefile.in ./test/y.tab.lib.c ./test/y.tab.lib.h ./test/y.tab.lib.output
+	rm -fr ./autom4te.cache/ ./src/.deps/ ./test/.deps/
+
+.PHONY: all configure clean

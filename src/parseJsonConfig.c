@@ -188,7 +188,7 @@ node* getElementFromObj(node* object){
 	static node* currentNode;
 	errno=0;
 
-	if(arrayRootElement == NULL){
+	if(object == NULL){
 		if(currentNode!=NULL){
 			if(currentNode->nextNode!=NULL){
 				currentNode=currentNode->nextNode;
@@ -204,10 +204,10 @@ node* getElementFromObj(node* object){
 			errno=WRONG_INITIAL_NODE;
 		}
 	}else{
-		if(arrayRootElement->nodeType==OBJ_T){
-			currentNode=arrayRootElement->innerNode;
+		if(object->nodeType==OBJ_T){
+			currentNode=object->innerNode;
 			if(currentNode==NULL){
-				currentNode=arrayRootElement->nextNode;
+				currentNode=object->nextNode;
 			}
 			if(!isScalar(currentNode) || errno!=0){
 			      errno=UNHANDLED_NODE_TYPE;
