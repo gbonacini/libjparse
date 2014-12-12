@@ -20,7 +20,7 @@
 
 #include <jsonParserTypes.h>
 
-int parseJsonConfig(char* configPath, node* nodeRoot, pathIndex** fullIndexesList);
+int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullIndexesList);
 
 #endif
 

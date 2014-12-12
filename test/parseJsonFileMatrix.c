@@ -83,7 +83,7 @@ int main(int argc, char** argv){
 		printErrorMesg("The url was not specified.!\n");
  }
  
- result=parseJsonConfig(jsonFile, &nodeRoot, &fullIndexesList);
+ result=parseJsonConfig((char const *)jsonFile, &nodeRoot, &fullIndexesList);
 
  if(result>0){
 	verboseLong(debug, "Parse status: OK IndexLen: %d\n", result);

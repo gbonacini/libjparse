@@ -33,7 +33,7 @@ extern int yyparse(node* nodeZero);
 extern int list;
 extern pathBuffer* pathList[MAX_NODE_STACK];
 
-int parseJsonConfig(char* configPath, node* nodeRoot, pathIndex** fullIndexesList){
+int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullIndexesList){
 	FILE* CONFIG= fopen(configPath, "r");
 	if(CONFIG != NULL){
 		yyin=CONFIG;
