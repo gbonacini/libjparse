@@ -92,7 +92,7 @@ int main(int argc, char** argv){
 
 
 
- element=getElementValueByString(fullIndexesList, url); 
+ element=getElementValueByString(fullIndexesList, (char const *)url); 
  verbose(debug, "------------- End Search ---------------\n");
  if(element!=NULL){
 	tempNode=element->Node;
@@ -130,7 +130,7 @@ int printNodeValue(node* nodeElement){
 				switch(nodeElement->nodeType){
 					case ROOT_T:
 						if(checktype)
-							fprintf(ERRSTREAM," This is the ROOT node.\nValue: \n");
+							fprintf(ERRSTREAM," This is the ROOT node.\n");
 					break;
 					case EMPTY_T:
 						if(checktype)

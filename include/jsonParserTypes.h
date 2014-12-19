@@ -87,7 +87,7 @@ void memoryError(void);
 void spaceError(char* errMsg);
 #define chackSpace(X,Y,Z) if(X == Y) spaceError(Z)
 /*@null@*/
-pathIndex* getElementValueByString(pathIndex* fullIndexesList, char* key);
+pathIndex* getElementValueByString(pathIndex* fullIndexesList, char const *key);
 bool checkNodeType(node* nodeElement, type expectType);
 node* getArrayElements(node* arrayRootElement);
 node* getArrayOfObjsElements(node* arrayRootElement);

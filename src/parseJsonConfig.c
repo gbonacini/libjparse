@@ -115,7 +115,7 @@ int indexesListSearch (const void* sbuff1, const void* sbuff2){
 }
 
 /*@null@*/
-pathIndex* getElementValueByString(pathIndex* fullIndexesList, char* key){
+pathIndex* getElementValueByString(pathIndex* fullIndexesList, char const *key){
 	return bsearch( (void*)key, fullIndexesList, (size_t)list, sizeof (pathIndex), indexesListSearch);
 }
 

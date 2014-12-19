@@ -94,7 +94,7 @@ int main(int argc, char** argv){
 
 
 
- element=getElementValueByString(fullIndexesList, url); 
+ element=getElementValueByString(fullIndexesList, (char const *)url); 
  verbose(debug, "------------- End Search ---------------\n");
 
  tempNode=getArrayOfObjsElements(element->Node);
