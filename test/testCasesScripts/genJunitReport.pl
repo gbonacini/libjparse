@@ -40,11 +40,11 @@ my $template = "";
 $template .= sprintf("%s", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 $template .= sprintf(" <testsuites disabled=\"0\" errors=\"%d\" failures=\"%d\" name=\"%s\" tests=\"%d\" time=\"%f\">\n", 
 			$nerr, $nerr, $testUnit, $ntest, $elapsedtime);
-$template .= sprintf("  <testsuite name=\"%s\" errors=\"%d\" tests=\"%d\" failures=\"%d\" time=\"%f\" timestamp=\"%s\" />\n",
+$template .= sprintf("  <testsuite name=\"%s\" errors=\"%d\" tests=\"%d\" failures=\"%d\" time=\"%f\" timestamp=\"%s\">\n",
 			 $testUnit, $nerr, $ntest, $nerr, $elapsedtime,  $timestamp);
 $template .= sprintf("   <properties>\n");
-$template .= sprintf("     <property name=\"cc.vendor\" value=\"%s\" />\n", $compilerString? $compilerString : 'Not available');
-$template .= sprintf("     <property name=\"compiler.debug\" value=\"on\" />\n");
+$template .= sprintf("     <property name=\"cc.vendor\" value=\"%s\"/>\n", $compilerString? $compilerString : 'Not available');
+$template .= sprintf("     <property name=\"compiler.debug\" value=\"on\"/>\n");
 $template .= sprintf("   </properties>\n");
 for my $tst ( keys %tests ) {
 	die ("Message Wrong Format") if($tests{$tst} !~ /[%]/ or $tests{$tst} =~ /[@].*[%]/ or $tst =~ /[@%]/ );
