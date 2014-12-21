@@ -49,9 +49,11 @@ for my $tst ( keys %tests ) {
 	die ("Message Wrong Format") if($tests{$tst} !~ /[%]/ or $tests{$tst} =~ /[@].*[%]/ or $tst =~ /[@%]/ );
 	my @descriptions = split('[@%]', $tests{$tst});
 	my $partialtime = $descriptions[1] ? $descriptions[1] : 0;
-	$template .= sprintf("    <testcase classname=\"%s\" name=\"%s\" time=\"%f\">\n", $tst, $descriptions[0], $partialtime );
-        $template .= sprintf("     <failure message=\"%s failure\">%s</failure>\n", $tst, $descriptions[2]) if($descriptions[2]);
-	$template .= sprintf("    </testcase>\n");
+	$template .= sprintf("   <testcase classname=\"%s\" name=\"%s\" time=\"%f\">\n", $tst, $descriptions[0], $partialtime );
+        if($descriptions[2]){
+		$template .= sprintf("     <failure message=\"%s failure\">%s</failure>\n", $tst, $descriptions[2]);
+		$template .= sprintf("    </testcase>\n");
+	}
 }
 $template .= sprintf(" </testsuite>\n");
 $template .= sprintf("</testsuites>\n");
