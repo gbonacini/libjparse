@@ -38,8 +38,8 @@ chomp($compilerString);
 
 my $template = "";
 $template .= sprintf("%s", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-#$template .= sprintf(" <testsuites disabled=\"0\" errors=\"%d\" failures=\"%d\" name=\"%s\" tests=\"%d\" time=\"%f\">\n", 
-			#$nerr, $nerr, $testUnit, $ntest, $elapsedtime);
+$template .= sprintf(" <testsuites disabled=\"0\" errors=\"%d\" failures=\"%d\" name=\"%s\" tests=\"%d\" time=\"%f\">\n", 
+			$nerr, $nerr, $testUnit, $ntest, $elapsedtime);
 $template .= sprintf("  <testsuite name=\"%s\" errors=\"%d\" tests=\"%d\" failures=\"%d\" time=\"%f\" timestamp=\"%s\" />\n",
 			 $testUnit, $nerr, $ntest, $nerr, $elapsedtime,  $timestamp);
 $template .= sprintf("   <properties>\n");
@@ -55,7 +55,7 @@ for my $tst ( keys %tests ) {
 	$template .= sprintf("   </testcase>\n");
 }
 $template .= sprintf(" </testsuite>\n");
-#$template .= sprintf("</testsuites>\n");
+$template .= sprintf("</testsuites>");
 
 print REPO $template;
 
