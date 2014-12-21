@@ -2,9 +2,13 @@
 
 use warnings;
 use strict;
+use Time::HiRes qw(time);
 
 sub testFail;
 
+my $milli0 = time;
+my $milli1; 
+my $millit; 
 my $node=9;
 my $previousNode=11;
 my $nextNode=13;
@@ -16,6 +20,8 @@ my $nullNode="0x0";
 my $SOp=qx/uname/;
 
 my $i=0;
+my $errors=0;
+my $errorsString="testJsonAddr|Integrity Path Test%ELAPSEDTIME|";
 my @array = ();
 
 chomp($SOp);
@@ -150,11 +156,17 @@ testFail("Footer Node Out") if( $array[55][$outerNode] ne $array[1][$node]);
 testFail("Footer Node Exit") if( $array[55][$exitNode] ne $nullNode);
 # -------------------------------------
 
-
 print STDERR "Test: pass\n";
-exit 0;
+$milli1 = time;
+$millit = $milli1 - $milli0; 
+$errorsString =~ s/ELAPSEDTIME/$millit/;
+
+system("perl testCasesScripts/genJunitReport.pl -n JsonAddr -d \"$errorsString\" -t $millit -o .");
+exit 0 if($errors == 0);
+exit -1;
 
 sub testFail{
 	print STDERR "Test: fail - @_\n";
-	exit -1;
+	$errorsString = $errorsString . @_ . "%0" . "\@" . @_ . " Error" . "|" ;
+	$errors++;
 }

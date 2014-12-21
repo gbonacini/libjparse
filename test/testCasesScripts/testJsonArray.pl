@@ -2,6 +2,13 @@
 
 use warnings;
 use strict;
+use Time::HiRes qw(time);
+
+my $milli0 = time;
+my $milli1;
+my $millit;
+my $errors=0;
+my $errorsString="testJsonArray|Integrity Values Test%ELAPSEDTIME|";
 
 sub testFail;
 
@@ -19,11 +26,18 @@ while (<>){
 testFail("Array Data Coerency") if($sample ne $output);
 
 print STDERR "Test: pass\n";
-exit 0;
+$milli1 = time;
+$millit = $milli1 - $milli0;
+$errorsString =~ s/ELAPSEDTIME/$millit/;
+
+system("perl testCasesScripts/genJunitReport.pl -n JsonArray -d \"$errorsString\" -t $millit -o .");
+exit 0 if($errors == 0);
+exit -1;
 
 sub testFail{
-	print STDERR "Test: fail - @_\n";
-	exit -1;
+        print STDERR "Test: fail - @_\n";
+        $errorsString = $errorsString . @_ . "%0" . "\@" . @_ . " Error" . "|" ;
+        $errors++;
 }
 
 

@@ -4,6 +4,8 @@ set timeout 20
 set key [lindex $argv 0]
 set data [lindex $argv 1]
 set file [lindex $argv 2]
+set errorsString "testJsonData|Integrity Data Test%0.0";
+set time0 [ clock clicks -milliseconds ];
 
 if {[llength $argv] == 0} {
   send_user "Usage: testJsonData.exp.exp <key> <data> <file>\n";
@@ -13,8 +15,21 @@ if {[llength $argv] == 0} {
 spawn ./parseJsonFile -f$file -v$key
 
 expect {
-	 "$data" { send_user "Test: pass\n"; exit 0}
-	eof { send_user "Test: fail -- wrong output!\n"; exit 1}
+	 "$data" { send_user "Test: pass\n"; 
+		   set time1 [ clock clicks -milliseconds];
+	           set timet [ expr {$time1 - $time0}];
+	           set timet [ expr { double($timet) / 1000 }];
+		   exec perl testCasesScripts/genJunitReport.pl -n JsonData -d $errorsString -t $timet -o . ; 
+		   exit 0
+		 }
+	eof { send_user "Test: fail -- wrong output!\n";
+	      append testJsonData "@Wrong Output";
+		   set time1 [ clock clicks -milliseconds];
+	           set timet [ expr {$time1 - $time0}];
+	           set timet [ expr { double($timet) / 1000 }];
+	      exec perl testCasesScripts/genJunitReport.pl -n JsonData -d $errorsString -t $timet -o . ;
+	      exit 1
+	    }
 	timeout { send_user "Test: fail -- timeout!";  exit 1}
 }
 
