@@ -68,14 +68,14 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 38 "/Users/bg/_Sorgenti/_Json_LY_hg/src/jsonGram.y"
+#line 38 "/Users/bg/_Sorgenti/_Json/_Json_LY_hg/src/jsonGram.y"
 {
         bool boolean;
         double number;
         char *string;
 }
 /* Line 1529 of yacc.c.  */
-#line 79 "/Users/bg/_Sorgenti/_Json_LY_hg/src/../include/jsonGram.h"
+#line 79 "/Users/bg/_Sorgenti/_Json/_Json_LY_hg/src/../include/jsonGram.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

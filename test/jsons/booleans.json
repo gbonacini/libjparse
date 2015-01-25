@@ -1,0 +1,9 @@
+{ 
+	"postalCode" : 10021,
+	"message" : "hello",
+	"string" : false, 
+	"flag" : true, 
+	"status" : false, 
+	"valid" : true
+}
+

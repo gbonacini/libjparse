@@ -126,7 +126,7 @@ expression:	STRING TAG value 	{
 							case BOOL_T:
 								addNode($1);
 						
-								(currentNode->data).number=buffer.boolean;
+								(currentNode->data).boolean=buffer.boolean;
 								currentNode->nodeType=BOOL_T;
 								makePathChain(NULL);
 							break;

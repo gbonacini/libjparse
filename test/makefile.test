@@ -8,6 +8,7 @@ PERL = perl
 SOURCES = ../src/json.c ../src/jsonGram.c ../src/parseJsonConfig.c
 SCRIPTS = testCasesScripts/testJsonData.exp testCasesScripts/testJsonAddr.pl
 TEST_FILE_A = jsons/sample.null.json
+TEST_FILE_B = jsons/booleans.json
 
 .PHONY: all rebuild static tests  rebuild clean lint valgrind
 
@@ -35,5 +36,9 @@ tests: $(SCRIPTS) $(TEST_FILE_A)
 	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.footer" "The End" "$(TEST_FILE_A)"
 	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.title" "SVG Viewer" "$(TEST_FILE_A)"
 	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.menu.items.Object_Data_17.label" "View Source" "$(TEST_FILE_A)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.flag" "1" "$(TEST_FILE_B)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.message" "hello" "$(TEST_FILE_B)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.postalCode" "10021.000000" "$(TEST_FILE_B)"
+	@$(EXPECT) ./testCasesScripts/testJsonData.exp "root.string" "0" "$(TEST_FILE_B)"
 	@ ./listAddresses $(TEST_FILE_A) 2>&1  | $(PERL) ./testCasesScripts/testJsonAddr.pl 
 	@./parseJsonFileMatrix -f"$(TEST_FILE_A)" -v"root.menu.items" 2>&1 | $(PERL) ./testCasesScripts/testJsonArray.pl 
