@@ -3,7 +3,8 @@ all:
 	autoheader
 	libtoolize 
 	automake -a 
-	autoreconf
+	#autoreconf -f -i -Wall,no-obsolete
+	autoreconf -ivf
 
 configure:
 	./configure

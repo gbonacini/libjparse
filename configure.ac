@@ -13,6 +13,7 @@ AC_CONFIG_HEADER([include/config.h])
 
 LT_INIT
 AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE([disable])
 
 AC_CONFIG_MACRO_DIR([m4])
 
