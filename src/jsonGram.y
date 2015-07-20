@@ -141,7 +141,7 @@ expression:	STRING TAG value 	{
 								pendingClose=true;
 								free((nodeStack[level])->nodeName);
 								(nodeStack[level])->nodeName=NULL;
-								(nodeStack[level])->nodeName=strdup($1);
+								(nodeStack[level])->nodeName=$1;
 								checkMemoryErrors((nodeStack[level])->nodeName);
 
 								makePathChain(nodeStack[level]);
@@ -205,7 +205,7 @@ value:	NUMBER  	{
 					fprintf(ERRSTREAM, "YACC - Value String %s -- Level %d\n", $1, level) ;
 				#endif
 				currentType=TEXT_T;
-				buffer.string=strdup($1);
+				buffer.string=$1;
 				checkMemoryErrors(buffer.string);
 			;}
 	;
@@ -325,7 +325,7 @@ void addNode(char* nodeName){
 		break;
 	}
 	if(nodeName!=NULL){
-		currentNode->nodeName=strdup(nodeName);
+		currentNode->nodeName=nodeName;
 		if(currentNode->nodeName==NULL){
 			memoryError();
 		}
