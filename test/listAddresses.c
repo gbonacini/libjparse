@@ -91,10 +91,6 @@ int printNodes(node* nodeElement, int node){
 				case UNASSIGNED_T:
 					fprintf(stderr,"Type;UNASSIGNED;Type;%d;",nodeElement->nodeType);
 				break;
-				default:
-					fprintf(stderr," Error, Unhandled Type;Type=%d;",nodeElement->nodeType);
-					err=-2;
-				break;
 			}
 			fprintf(stderr,"node;%p;previousNode;%p;nextNode;%p;innerNode;%p;outerNode;%p;exitNode;%p\n",\
 				nodeElement, nodeElement->previousNode, nodeElement->nextNode,\

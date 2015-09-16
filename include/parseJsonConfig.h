@@ -18,9 +18,23 @@
 #ifndef __PARSEJSONCONFIG__
 #define __PARSEJSONCONFIG__
 
+#include <stdio.h>
+
 #include <jsonParserTypes.h>
 
 int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullIndexesList);
+
+extern FILE * yyin;
+extern int yydebug;
+extern int yyparse(node* nodeZero);
+extern int list;
+extern pathBuffer* pathList[MAX_NODE_STACK];
+
+extern int yydebug;
+extern int id, level, list;
+extern node* currentNode;
+extern node* nodeStack[MAX_NODE_STACK];
+extern pathBuffer* pathList[MAX_NODE_STACK];
 
 #endif
 

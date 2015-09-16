@@ -8,15 +8,7 @@
 #include <stdbool.h>
 
 #include <jsonParserTypes.h>
-#include <jsonGram.h>
-
-extern int level;
-extern int id;
-extern branch moveBranch;
-extern YYSTYPE yylval;
-extern int yyerror();
-extern node* currentNode;
-extern node* nodeStack[MAX_NODE_STACK];
+#include <jsonGramTypes.h>
 
 %}
 

@@ -24,9 +24,9 @@
 #include <parseJsonConfig.h>
 
 int printNodeValue(node* nodeStack);
-void printErrorMesg(char* msg);
+__attribute__((noreturn)) void printErrorMesg(char* msg);
 
-bool checktype=false, debug=false;;
+static bool checktype=false, debug=false;
 
 int main(int argc, char** argv){
 
@@ -60,8 +60,8 @@ int main(int argc, char** argv){
 		}
 	break;
 	case 'h':               /* Help */
-			printErrorMesg(NULL);
-	break;
+			printErrorMesg(NULL); 
+			// The program exits
 	case 't':               /* Type */
 			checktype=true;
 	break;
@@ -141,7 +141,7 @@ void printErrorMesg(char* msg){
 
 int printNodeValue(node* nodeElement){
 			int err=0;
-			node* currentNode=NULL;
+			node* currNode=NULL;
 
 			if(nodeElement != NULL){
 				verboseLong(debug,"NODE -- Label:%s -- ",nodeElement->nodeName);
@@ -177,14 +177,14 @@ int printNodeValue(node* nodeElement){
 					case  MATRIX_T:
 						if(checktype)
 							fprintf(ERRSTREAM," MATRIX_T is present.\n");
-						currentNode=nodeElement->innerNode;
-						while(currentNode!=NULL){
-							if(currentNode->innerNode!=NULL)
-								currentNode=currentNode->innerNode;
-							else if(currentNode->nextNode!=NULL)
-								currentNode=currentNode->nextNode;
+						currNode=nodeElement->innerNode;
+						while(currNode!=NULL){
+							if(currNode->innerNode!=NULL)
+								currNode=currNode->innerNode;
+							else if(currNode->nextNode!=NULL)
+								currNode=currNode->nextNode;
 							else
-								currentNode=NULL;
+								currNode=NULL;
 						}
 					break;
 					case  OBJ_T:
@@ -193,11 +193,6 @@ int printNodeValue(node* nodeElement){
 					case UNASSIGNED_T:
 						fprintf(ERRSTREAM," Error: UNASSIGNED is present. ");
 						fprintf(ERRSTREAM," Type:%d \n ",nodeElement->nodeType);
-					break;
-					default:
-						fprintf(ERRSTREAM," Error: Unhandled Type!. ");
-						fprintf(ERRSTREAM," Type:%d \n ",nodeElement->nodeType);
-						err=-2;
 					break;
 				}
                         }else{

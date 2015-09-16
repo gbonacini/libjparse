@@ -77,11 +77,12 @@ struct pathBuffer{
 
 void addNode(char* nodeName);
 node* allocateEmptyNode(void);
-void makeLinks(node* currentNode, node* newNode,type objType);
+void makeLinks(node* currentNodePtr, node* newNode,type objType);
 void initObjName(node* newNode, type objType);
 void makePathChain(node* objOrArray);
 int createIndex(pathIndex** fullIndexesList);
 int indexesListCmp (const void* sbuff1, const void* sbuff2);
+int indexesListSearch (const void* sbuff1, const void* sbuff2);
 void memoryError(void);
 #define checkMemoryErrors(X) if(X == NULL) memoryError()
 void spaceError(char* errMsg);

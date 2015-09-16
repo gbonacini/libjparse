@@ -10,25 +10,25 @@ int yyerror (node* nodeZero, char *msg);
 branch moveBranch;
 
 int yydebug=0;
-int level=0, previousLevel=0, id=0, currentPath=0;
-int list=0;
-
-bool pendingClose=false;
-bool pendingEmptyObj=false;
+int id=0, level=0, list=0;
 
 node* currentNode=NULL;
-node* previousObject=NULL;
-node* pendingLinkInner=NULL;
 node* nodeStack[MAX_NODE_STACK]; 
-
-char objNameBuffer[MAX_NAME_SIZE];
-char** pathStack[MAX_NODE_STACK]; 
-
 pathBuffer* pathList[MAX_NODE_STACK];
 
-pathBuffer* currentPathList=NULL;
-type currentType=UNASSIGNED_T;
-configData buffer;
+static int previousLevel=0;
+static bool pendingClose=false;
+static bool pendingEmptyObj=false;
+
+static node* previousObject=NULL;
+static node* pendingLinkInner=NULL;
+
+static char objNameBuffer[MAX_NAME_SIZE];
+static char** pathStack[MAX_NODE_STACK]; 
+
+static pathBuffer* currentPathList=NULL;
+static type currentType=UNASSIGNED_T;
+static configData buffer;
 
 %}
 
@@ -150,9 +150,11 @@ expression:	STRING TAG value 	{
 										(nodeStack[level])->nodeName);
 								#endif
 							break;
-							default:
+							case UNASSIGNED_T:
 								currentNode->nodeType=UNASSIGNED_T;
 							break;
+							case ROOT_T:
+								yyerror(NULL, "Unexpected Root Node");
 						}
 					;}
 ;
@@ -377,22 +379,22 @@ node* allocateEmptyNode(void){
 	return aNode;
 }
 
-void makeLinks(node* currentNode, node* newNode, type objType){
-	if(currentNode->nodeType == OBJ_T || currentNode->nodeType == MATRIX_T){
+void makeLinks(node* currentNodePtr, node* newNode, type objType){
+	if(currentNodePtr->nodeType == OBJ_T || currentNodePtr->nodeType == MATRIX_T){
 		if(!pendingEmptyObj){
-			currentNode->innerNode=newNode;
-			newNode->outerNode=currentNode;
+			currentNodePtr->innerNode=newNode;
+			newNode->outerNode=currentNodePtr;
 		}else{
-			currentNode->nextNode=newNode;
-			newNode->previousNode=currentNode;
+			currentNodePtr->nextNode=newNode;
+			newNode->previousNode=currentNodePtr;
 			pendingEmptyObj=false;
 		}
-		if(currentNode->innerNode == currentNode->nextNode)
-				currentNode->nextNode=NULL;
+		if(currentNodePtr->innerNode == currentNodePtr->nextNode)
+				currentNodePtr->nextNode=NULL;
 		if(newNode->outerNode == newNode->previousNode)
 				newNode->previousNode=NULL;
 	}else if(objType == OBJ_T){
-		currentNode->exitNode=newNode;
+		currentNodePtr->exitNode=newNode;
 		if(previousObject!=NULL && previousLevel==level){
 			previousObject->nextNode=newNode;
 			newNode->previousNode=previousObject;
@@ -400,17 +402,17 @@ void makeLinks(node* currentNode, node* newNode, type objType){
 			nodeStack[level]->nextNode=newNode;
 		}
 	}else if(objType == MATRIX_T){
-		currentNode->nextNode=newNode;
-		newNode->previousNode=currentNode;
+		currentNodePtr->nextNode=newNode;
+		newNode->previousNode=currentNodePtr;
 	}else if(objType == UNASSIGNED_T){
 		if(pendingClose){
-			currentNode->nextNode=NULL;
-			currentNode->exitNode=newNode;
+			currentNodePtr->nextNode=NULL;
+			currentNodePtr->exitNode=newNode;
 			newNode->previousNode=nodeStack[level];
 		}else{ 
-			currentNode->nextNode=newNode;
-			newNode->previousNode=currentNode;
-			currentNode->exitNode=NULL;
+			currentNodePtr->nextNode=newNode;
+			newNode->previousNode=currentNodePtr;
+			currentNodePtr->exitNode=NULL;
 		}
 		newNode->outerNode=nodeStack[level-1];
 	}

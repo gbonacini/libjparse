@@ -316,7 +316,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = src test
-EXTRA_DIST = ./control ./AUTHORS ./COPYING ./INSTALL ./NEWS ./README ./copyright ./version ./ChangeLog
+EXTRA_DIST = ./control ./AUTHORS ./COPYING ./INSTALL ./NEWS ./README ./copyright ./version ./ChangeLog ./include/jsonGram.h
 all: all-recursive
 
 .SUFFIXES:

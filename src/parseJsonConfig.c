@@ -16,22 +16,11 @@
 // -----------------------------------------------------------------
 
 #include <jsonParserTypes.h>
+#include <parseJsonConfig.h>
+
 #include <stdlib.h>
 #include <string.h>
-
-#ifndef __STANDALONE_MAKEFILE__
-#include <jsonGram.h>
-#else
-#include <y.tab.h>
-#endif
-
 #include <stdio.h>
-
-extern FILE * yyin;
-extern int yydebug;
-extern int yyparse(node* nodeZero);
-extern int list;
-extern pathBuffer* pathList[MAX_NODE_STACK];
 
 int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullIndexesList){
 	FILE* CONFIG= fopen(configPath, "r");
@@ -252,7 +241,8 @@ bool isScalar(node* toCheck){
 		case EMPTY_T:
 			result=true;
 		break;
-		default:
+		case ROOT_T:
+		case UNASSIGNED_T:
 			errno=WRONG_NODE_TYPE;
 	}
 	return result;
