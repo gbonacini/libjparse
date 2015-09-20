@@ -4,6 +4,10 @@
 AC_PREREQ(2.61)
 AC_INIT([jconf], m4_esyscmd([ tr -d '\n' < version ]))
 
+CXXFLAGS=""
+CFLAGS=""
+CPPFLAGS=""
+
 AC_CONFIG_SRCDIR([src/parseJsonConfig.c])
 AC_CONFIG_SRCDIR([src/json.l])
 AC_CONFIG_SRCDIR([src/jsonGram.y])
