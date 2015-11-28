@@ -28,10 +28,10 @@ int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullInde
 		yyin=CONFIG;
 		yydebug=1;
 		if(yyparse(nodeRoot)!= 0){
-			return NO_PARSE_ERR;
+			return ERR_NO_PARSE;
 		}
 	}else{
-		return NO_CONFIG_FILE_ERR;
+		return ERR_NO_CONFIG_FILE;
 	}
 	(void)fclose(CONFIG);
 	return createIndex(fullIndexesList);
@@ -123,26 +123,26 @@ node* getArrayElements(node* arrayRootElement){
 			if(currentNode->nextNode!=NULL){
 				currentNode=currentNode->nextNode;
 				if(!isScalar(currentNode) || errno!=0 ){
-				      errno=UNHANDLED_NODE_TYPE;
+				      errno=ERR_UNHANDLED_NODE_TYPE;
 				      currentNode=NULL;
 				}
 			}else{
-				errno=NO_MORE_ELEMENTS;
+				errno=ERR_NO_MORE_ELEMENTS;
 				currentNode=NULL;
 			}
 		}else{
-			errno=WRONG_INITIAL_NODE;
+			errno=ERR_WRONG_INITIAL_NODE;
 		}
 	}else{
 		if(arrayRootElement->nodeType==MATRIX_T){
 			currentNode=arrayRootElement->innerNode;
 			if(!isScalar(currentNode) || errno!=0 ){
-			      errno=UNHANDLED_NODE_TYPE;
+			      errno=ERR_UNHANDLED_NODE_TYPE;
 			      currentNode=NULL;
 			}
 				
 		}else{
-			errno=WRONG_NODE_TYPE;
+			errno=ERR_WRONG_NODE_TYPE;
 			currentNode=NULL;
 		}
 	} 
@@ -160,15 +160,15 @@ node* getArrayOfObjsElements(node* arrayRootElement){
 			if(currentNode->nextNode!=NULL){
 				currentNode=currentNode->nextNode;
 				if(currentNode->nodeType != OBJ_T){
-				      errno=UNHANDLED_NODE_TYPE;
+				      errno=ERR_UNHANDLED_NODE_TYPE;
 				      currentNode=NULL;
 				}
 			}else{
-				errno=NO_MORE_ELEMENTS;
+				errno=ERR_NO_MORE_ELEMENTS;
 				currentNode=NULL;
 			}
 		}else{
-			errno=WRONG_INITIAL_NODE;
+			errno=ERR_WRONG_INITIAL_NODE;
 		}
 	}else{
 		if(arrayRootElement->nodeType==MATRIX_T){
@@ -177,12 +177,12 @@ node* getArrayOfObjsElements(node* arrayRootElement){
 				currentNode=arrayRootElement->nextNode;
 			}
 			if(currentNode->nodeType != OBJ_T){
-			      errno=UNHANDLED_NODE_TYPE;
+			      errno=ERR_UNHANDLED_NODE_TYPE;
 			      currentNode=NULL;
 			}
 				
 		}else{
-			errno=WRONG_NODE_TYPE;
+			errno=ERR_WRONG_NODE_TYPE;
 			currentNode=NULL;
 		}
 	} 
@@ -199,15 +199,15 @@ node* getElementFromObj(node* object){
 			if(currentNode->nextNode!=NULL){
 				currentNode=currentNode->nextNode;
 				if(!isScalar(currentNode) || errno!=0){
-				      errno=UNHANDLED_NODE_TYPE;
+				      errno=ERR_UNHANDLED_NODE_TYPE;
 				      currentNode=NULL;
 				}
 			}else{
-				errno=NO_MORE_ELEMENTS;
+				errno=ERR_NO_MORE_ELEMENTS;
 				currentNode=NULL;
 			}
 		}else{
-			errno=WRONG_INITIAL_NODE;
+			errno=ERR_WRONG_INITIAL_NODE;
 		}
 	}else{
 		if(object->nodeType==OBJ_T){
@@ -216,12 +216,12 @@ node* getElementFromObj(node* object){
 				currentNode=object->nextNode;
 			}
 			if(!isScalar(currentNode) || errno!=0){
-			      errno=UNHANDLED_NODE_TYPE;
+			      errno=ERR_UNHANDLED_NODE_TYPE;
 			      currentNode=NULL;
 			}
 				
 		}else{
-			errno=WRONG_NODE_TYPE;
+			errno=ERR_WRONG_NODE_TYPE;
 			currentNode=NULL;
 		}
 	} 
@@ -243,7 +243,7 @@ bool isScalar(node* toCheck){
 		break;
 		case ROOT_T:
 		case UNASSIGNED_T:
-			errno=WRONG_NODE_TYPE;
+			errno=ERR_WRONG_NODE_TYPE;
 	}
 	return result;
 }

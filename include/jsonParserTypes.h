@@ -21,25 +21,23 @@
 #include <stdbool.h>
 #include <errno.h>
 
-#define MAX_NODE_STACK 1024
-#define NO_CONFIG_FILE_ERR -1
-#define NO_PARSE_ERR -2
+#define MAX_NODE_STACK      1024
+#define MAX_NAME_SIZE       1024
+#define MAX_INDEX_SIZE      10240
 
-#define WRONG_NODE_TYPE		1
-#define WRONG_INITIAL_NODE	2
-#define UNHANDLED_NODE_TYPE	3
-#define NO_MORE_ELEMENTS	4
+#define ERR_NO_CONFIG_FILE      2
+#define ERR_NO_PARSE            3
+#define ERR_WRONG_NODE_TYPE	4
+#define ERR_WRONG_INITIAL_NODE	5
+#define ERR_UNHANDLED_NODE_TYPE	6
+#define ERR_NO_MORE_ELEMENTS	7
 
-#define MAX_NAME_SIZE 1024
-#define MAX_INDEX_SIZE 10240
-
-#define ERRSTREAM stderr
+#define ERRSTREAM               stderr
+#define ROOT_NODE_NAME          "root"
+#define DEF_YYWRAP_RETURN       1
 
 typedef enum {MOVE_INNER_OBJECT, MOVE_INNER_ARRAY, DONT_CHANGE_BRANCH, END_OBJ_PENDING, END_OBJ_CLOSED} branch;
-#define CLOSED_ALLOCATION -2
 typedef enum {ROOT_T, EMPTY_T, NUMERIC_T, TEXT_T, BOOL_T, MATRIX_T, OBJ_T, UNASSIGNED_T} type;
-
-#define ROOT_NODE_NAME "root"
 
 typedef union configData{
 	double number;

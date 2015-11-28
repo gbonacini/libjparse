@@ -137,6 +137,6 @@ int yywrap(){
  		fprintf(ERRSTREAM,"Lex - EOF\n");  
 	#endif
 
-	return 1; 
+	return DEF_YYWRAP_RETURN; 
 }
 
