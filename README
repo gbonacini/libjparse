@@ -1,2 +1,11 @@
 Jconf is a library that permits to manage the file-based configuration of programs using json files.
 
+Build:
+------
+
+ autoreconf -ivf
+ ./configure
+ make 
+ make install ( or sudo make install)
+
+
