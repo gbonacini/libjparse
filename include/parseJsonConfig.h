@@ -25,9 +25,7 @@
 int parseJsonConfig(char const *configPath, node* nodeRoot, pathIndex** fullIndexesList);
 
 extern FILE * yyin;
-extern int yydebug;
 extern int yyparse(node* nodeZero);
-extern int list;
 extern pathBuffer* pathList[MAX_NODE_STACK];
 
 extern int yydebug;
