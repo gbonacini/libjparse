@@ -67,7 +67,7 @@ case $host_os in
                         OPTIMIZATION=" -O0 -g -Wextra -Wall -Wformat -Werror=format-security  "
               fi
               if test "x$CC" = xgcc; then
-                    CFLAGS=" -D_XOPEN_SOURCE ${OPTIMIZATION} "
+                    CFLAGS=" -D_XOPEN_SOURCE=500 ${OPTIMIZATION} "
                     LDFLAGS=" $LDFLAGS -Wl,-z,relro "
               else
                     CFLAGS=" -O0 -g -Wall "

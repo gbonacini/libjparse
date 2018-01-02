@@ -128,7 +128,8 @@ null {
 	return SEPARATOR;
 }
 .  {
- yyerror("illegal token"); 
+ node* nullNode = NULL;
+ yyerror(nullNode, "illegal token"); 
 }
 %%
 

@@ -1,11 +1,11 @@
 %{
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <jsonParserTypes.h>
+#include <string.h>
 
 int yylex(void);
-int yyerror (node* nodeZero, char *msg);
+int yyerror (node* nodeZero, const char *msg);
 
 branch moveBranch;
 
@@ -268,7 +268,7 @@ emptyObject:	STARTBLOCK  ENDBLOCK		{
 %%
 
 /* Added because osx doesn't have liby.a installed. */
-int yyerror (node* nodeZero, char *msg) {
+int yyerror (node* nodeZero, const char *msg) {
 	return fprintf (ERRSTREAM, "YACC: Node %p -- error: %s\n",nodeZero,  msg);
 }
 
@@ -341,7 +341,8 @@ void makePathChain(node* objOrArray){
 	}
 	currentPathList=pathList[list];
 
-	for(int i=0; i<level; i++){
+	int i;
+	for(i=0; i<level; i++){
 		currentPathList->nodePathComponent=pathStack[i];
 		#ifdef __DEBUG__JSON__
 			fprintf(ERRSTREAM, "YACC - Node Obj Address processed %p\n", *(pathStack[i]));
