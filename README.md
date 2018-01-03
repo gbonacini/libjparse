@@ -11,5 +11,4 @@ build:
 
  autoreconf -ivf
  ./configure
- make  
  make install ( or sudo make install)
