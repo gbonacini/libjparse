@@ -8,3 +8,13 @@ ylwrap linguist-vendored
 Makefile.in linguist-vendored
 src/Makefile.in linguist-vendored
 test/Makefile.in linguist-vendored
+CppWrapper/config.guess linguist-vendored
+CppWrapper/config.sub linguist-vendored
+CppWrapper/depcomp linguist-vendored
+CppWrapper/install-sh linguist-vendored
+CppWrapper/libtool linguist-vendored
+CppWrapper/ltmain.sh linguist-vendored
+CppWrapper/ylwrap linguist-vendored
+CppWrapper/Makefile.in linguist-vendored
+CppWrapper/src/Makefile.in linguist-vendored
+CppWrapper/test/Makefile.in linguist-vendored
