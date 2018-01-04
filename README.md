@@ -11,6 +11,7 @@ build:
 
  autoreconf -ivf
  ./configure
+ make
  make install ( or sudo make install)
 
 C++ Wrapper:
@@ -19,7 +20,8 @@ C++ Wrapper:
 A C++ 11 wrapper of this library is included  (CppWrapper directory).
 To build the C++ library that include the wrapper, the following steps are required:
 
-cd CppWrapper
-autoreconf -ivf
-./configure
-make install ( or sudo make install)
+ cd CppWrapper
+ autoreconf -ivf
+ ./configure
+ make 
+ make install ( or sudo make install)

@@ -5,6 +5,7 @@ build:
 
  autoreconf -ivf
  ./configure
+ make
  make install ( or sudo make install)
 
 C++ Wrapper:
@@ -16,4 +17,5 @@ To build the C++ library that include the wrapper, the following steps are requi
 cd CppWrapper
 autoreconf -ivf
 ./configure
+ make
 make install ( or sudo make install)

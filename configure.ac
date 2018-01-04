@@ -68,7 +68,7 @@ case $host_os in
               fi
               if test "x$CC" = xgcc; then
                     CFLAGS=" -D_XOPEN_SOURCE=500 ${OPTIMIZATION} "
-                    LDFLAGS=" $LDFLAGS -Wl,-z,relro "
+                    LDFLAGS=" $LDFLAGS -Wl,-z,relro -Wl,--allow-multiple-definition"
               else
                     CFLAGS=" -O0 -g -Wall "
               fi

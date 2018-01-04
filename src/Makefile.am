@@ -7,11 +7,9 @@ AM_YFLAGS = --defines=$(PWD)/../include/jsonGram.h
 
 BUILT_SOURCES = jsonGram.h
 
-install: clean all
-
 jsonGram.h: jsonGram.y Makefile
 	${YACC} -d jsonGram.y -o ../include/jsonGram.h
 
 clean-local:
-	-rm -rf json.c jsonGram.c ../include/jsonGram.h
+	-rm -rf json.c jsonGram.c ../include/jsonGram.h jsonGram.o  json.o  parseJsonConfig.o
 
