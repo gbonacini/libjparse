@@ -104,17 +104,17 @@ int indexesListSearch (const void* sbuff1, const void* sbuff2){
 }
 
 /*@null@*/
-pathIndex* getElementValueByString(pathIndex* fullIndexesList, char const *key){
+pathIndex* getElementValueByString(const pathIndex * const fullIndexesList, char const * const key){
 	return bsearch( (void*)key, fullIndexesList, (size_t)list, sizeof (pathIndex), indexesListSearch);
 }
 
-bool checkNodeType(node* nodeElement, type expectType){
+bool checkNodeType(const node * const nodeElement, const type expectType){
         if(nodeElement->nodeType == expectType)
                         return true;
         return false;
 }
 
-node* getArrayElements(node* arrayRootElement){
+node* getArrayElements(const node * const arrayRootElement){
 	static node* currentNode;
 	errno=0;
 
@@ -151,7 +151,7 @@ node* getArrayElements(node* arrayRootElement){
 }
 
 
-node* getArrayOfObjsElements(node* arrayRootElement){
+node* getArrayOfObjsElements(const node * const arrayRootElement){
 	static node* currentNode;
 	errno=0;
 
@@ -190,7 +190,7 @@ node* getArrayOfObjsElements(node* arrayRootElement){
 	return currentNode;
 }
 
-node* getElementFromObj(node* object){
+node* getElementFromObj(const node * const object){
 	static node* currentNode;
 	errno=0;
 
@@ -229,7 +229,7 @@ node* getElementFromObj(node* object){
 	return currentNode;
 }
 
-bool isScalar(node* toCheck){
+bool isScalar(const node * const toCheck){
 	bool result=false;
 	switch(toCheck->nodeType){
 		case OBJ_T:

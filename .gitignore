@@ -1,1 +1,9 @@
 include/jsonGram.h
+CppWrapper/config.log
+CppWrapper/config.status
+CppWrapper/include/config.h
+CppWrapper/include/stamp-h1
+CppWrapper/src/.deps/
+CppWrapper/src/Makefile
+CppWrapper/test/.deps/
+CppWrapper/test/Makefile

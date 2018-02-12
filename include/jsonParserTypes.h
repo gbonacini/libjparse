@@ -73,27 +73,27 @@ struct pathBuffer{
         pathBuffer* Next;
 };
 
-void addNode(char* nodeName);
-node* allocateEmptyNode(void);
-void makeLinks(node* currentNodePtr, node* newNode,type objType);
-void initObjName(node* newNode, type objType);
-void makePathChain(node* objOrArray);
-int createIndex(pathIndex** fullIndexesList);
-int indexesListCmp (const void* sbuff1, const void* sbuff2);
-int indexesListSearch (const void* sbuff1, const void* sbuff2);
-void memoryError(void);
-#define checkMemoryErrors(X) if(X == NULL) memoryError()
-void spaceError(char* errMsg);
-#define chackSpace(X,Y,Z) if(X == Y) spaceError(Z)
+void       addNode(char* nodeName);
+node*      allocateEmptyNode(void);
+void       makeLinks(node* currentNodePtr, node* newNode,type objType);
+void       initObjName(node* newNode, type objType);
+void       makePathChain(node* objOrArray);
+int        createIndex(pathIndex** fullIndexesList);
+int        indexesListCmp (const void* sbuff1, const void* sbuff2);
+int        indexesListSearch (const void* sbuff1, const void* sbuff2);
+void       memoryError(void);
+#define    checkMemoryErrors(X) if(X == NULL) memoryError()
+void       spaceError(char* errMsg);
+#define    chackSpace(X,Y,Z) if(X == Y) spaceError(Z)
 /*@null@*/
-pathIndex* getElementValueByString(pathIndex* fullIndexesList, char const *key);
-bool checkNodeType(node* nodeElement, type expectType);
-node* getArrayElements(node* arrayRootElement);
-node* getArrayOfObjsElements(node* arrayRootElement);
-#define verbose(X,Y) if(X) fprintf(ERRSTREAM, Y);
-#define verboseLong(X,Y,Z) if(X) fprintf(ERRSTREAM, Y, Z);
-bool isScalar(node* toCheck);
-node* getElementFromObj(node* object);
+pathIndex* getElementValueByString(const pathIndex * const fullIndexesList, char const * const key);
+bool       checkNodeType(const node * const nodeElement, const type expectType);
+node*      getArrayElements(const node * const arrayRootElement);
+node*      getArrayOfObjsElements(const node * const arrayRootElement);
+#define    verbose(X,Y) if(X) fprintf(ERRSTREAM, Y);
+#define    verboseLong(X,Y,Z) if(X) fprintf(ERRSTREAM, Y, Z);
+bool       isScalar(const node * const toCheck);
+node*      getElementFromObj(const node * const object);
 
 #endif
 

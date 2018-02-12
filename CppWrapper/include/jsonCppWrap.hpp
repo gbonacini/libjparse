@@ -39,7 +39,7 @@ class JsonCppWrap{
 		node*    getElementValueByPath(const std::string * const elUrl)      const noexcept(true);
 		node*    getElementValueByPath(const std::string& elUrl)             const noexcept(true);
 		node*    getElementValueByPathExc(const char * const elUrl)          const noexcept(false);
-		node*    getElementValueByPathExc(const std::string const * elUrl)   const noexcept(false);
+		node*    getElementValueByPathExc(const std::string * const elUrl)   const noexcept(false);
 		node*    getElementValueByPathExc(const std::string& elUrl)          const noexcept(false);
 		type     getType(const node * const nodeElement)                     const noexcept(true);
 		node*    getArrayElements(const node * const arrayRootElement)       const noexcept(true);
@@ -53,7 +53,7 @@ class JsonCppWrap{
 		                                           std::string>& urlMap)     const noexcept(true);
 		bool     isScalar(const node * const toCheck)                        const noexcept(true);
 		void     printNodeValueExc(const node * const nodeElement)           const noexcept(false);
-		int      printNodeValue(cosnt node * const nodeElement)              const noexcept(false);
+		int      printNodeValue(const node * const nodeElement)              const noexcept(false);
 	private:
 		std::string    jsonFilePath;
 		pathIndex*     fullIndexesList;
