@@ -31,26 +31,22 @@ namespace jsonCppWrap{
 	JsonCppWrapException::JsonCppWrapException(int errCode, string* errMsg) : \
 				   errorCode(errCode), errorMessage(*errMsg){ }
 
-	string JsonCppWrapException::what(void) const noexcept{
+	string JsonCppWrapException::what(void) const noexcept(true){
 			return errorMessage;
 	}
 
-JsonCppWrap::JsonCppWrap(string* jsonFile)  : JsonCppWrap(jsonFile->c_str()){
+    JsonCppWrap::JsonCppWrap(const string * const jsonFile)  : JsonCppWrap(jsonFile->c_str()){}
 
-        }
+    JsonCppWrap::JsonCppWrap(const string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){}
 
-JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
-
-        }
-
-	JsonCppWrap::JsonCppWrap(const char* jsonFile)  : jsonFilePath(jsonFile){
+	JsonCppWrap::JsonCppWrap(const char * const jsonFile)  : jsonFilePath(jsonFile){
 		int status=::parseJsonConfig(jsonFile, &nodeRoot, &fullIndexesList);
 		if(status<=0){
 			throw JsonCppWrapException(status, "Parse status: NOK Err");
 		}
 	}
 
-	node* JsonCppWrap::getElementValueByPath(const char *elUrl) const noexcept{
+	node* JsonCppWrap::getElementValueByPath(const char * const elUrl) const noexcept(true){
 		pathIndex* element;
 		element = ::getElementValueByString(fullIndexesList, elUrl);
 		if(element==nullptr){
@@ -60,23 +56,23 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return element->Node;
 	}
 
-	node* JsonCppWrap::getElementValueByPath(string* elUrl) const noexcept{
+	node* JsonCppWrap::getElementValueByPath(const string * const elUrl) const noexcept(true){
 		return getElementValueByPath(elUrl->c_str());
 	}
 
-	node* JsonCppWrap::getElementValueByPath(string& elUrl) const noexcept{
+	node* JsonCppWrap::getElementValueByPath(const string& elUrl) const noexcept(true){
 		return getElementValueByPath(elUrl.c_str());
 	}
 	
-	node* JsonCppWrap::getElementValueByPathExc(string* elUrl) const {
+	node* JsonCppWrap::getElementValueByPathExc(const string * const elUrl) const noexcept(false){
 		return getElementValueByPathExc(elUrl->c_str());
 	}
 	
-	node* JsonCppWrap::getElementValueByPathExc(string& elUrl) const {
+	node* JsonCppWrap::getElementValueByPathExc(const string& elUrl) const noexcept(false){
 		return getElementValueByPathExc(elUrl.c_str());
 	}
 
-	node* JsonCppWrap::getElementValueByPathExc(const char *elUrl) const {
+	node* JsonCppWrap::getElementValueByPathExc(const char * const elUrl) const noexcept(false){
 		pathIndex* element;
 		element = ::getElementValueByString(fullIndexesList, elUrl);
 		if(element==nullptr){
@@ -86,23 +82,23 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return element->Node;
 	}
 
-	node* JsonCppWrap::getArrayElements(node* arrayRootElement) const noexcept{
+	node* JsonCppWrap::getArrayElements(const node * const arrayRootElement) const noexcept(true){
 		return ::getArrayElements(arrayRootElement);
 	}
 
-	node* JsonCppWrap::getArrayOfObjsElements(node* arrayRootElement) const noexcept{
+	node* JsonCppWrap::getArrayOfObjsElements(const node * const arrayRootElement) const noexcept(true){
 		return ::getArrayOfObjsElements(arrayRootElement);
 	}
 
-	node* JsonCppWrap::getElementFromObj(node* object) const noexcept{
+	node* JsonCppWrap::getElementFromObj(const node * const object) const noexcept(true){
 		return ::getElementFromObj(object);
 	}
 
-	bool JsonCppWrap::isScalar(node* toCheck) const noexcept{
+	bool JsonCppWrap::isScalar(const node * const toCheck) const noexcept(true){
 		return ::isScalar(toCheck);
 	}
 
-	bool JsonCppWrap::checkPath(char const *elUrl) const noexcept{
+	bool JsonCppWrap::checkPath(char const * const elUrl) const noexcept(true){
 		pathIndex* element;
 		element = ::getElementValueByString(fullIndexesList, elUrl);
 		if(element==nullptr){
@@ -111,15 +107,15 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return true;
 	}
 
-	bool JsonCppWrap::checkPath(string* elUrl) const noexcept{
+	bool JsonCppWrap::checkPath(const string * const elUrl) const noexcept(true){
 		return checkPath(elUrl->c_str());
 	}
 
-	bool JsonCppWrap::checkPath(string& elUrl) const noexcept{
+	bool JsonCppWrap::checkPath(const string& elUrl) const noexcept(true){
 		return checkPath(elUrl.c_str());
 	}
 
-	bool JsonCppWrap::checkPathList(const vector<string>& urlList) const noexcept{
+	bool JsonCppWrap::checkPathList(const vector<string>& urlList) const noexcept(true){
 		for (auto iter : urlList ){
 			if(!checkPath(iter.c_str())){
 				return false;
@@ -128,7 +124,7 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return true;
 	}
 
-	bool JsonCppWrap::checkPathMapValues(const std::map<std::string, std::string>& urlMap) const noexcept{
+	bool JsonCppWrap::checkPathMapValues(const std::map<std::string, std::string>& urlMap) const noexcept(true){
 		for (auto iter : urlMap ){
 			if(!checkPath(iter.second.c_str())){
 				return false;
@@ -137,11 +133,11 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return true;
 	}
 
-	type JsonCppWrap::getType(node* nodeElement) const noexcept{
+	type JsonCppWrap::getType(const node * const nodeElement) const noexcept(true){
 		return nodeElement->nodeType;
 	}
 
-	void JsonCppWrap::printNodeValueExc(node* nodeElement) const{
+	void JsonCppWrap::printNodeValueExc(const node * const nodeElement) const{
 
                                 switch(nodeElement->nodeType){
                                         case ROOT_T:
@@ -171,7 +167,7 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
                                 }
 	}
 
-	int JsonCppWrap::printNodeValue(node* nodeElement) const{
+	int JsonCppWrap::printNodeValue(const node * const nodeElement) const noexcept(false){
 
                                 switch(nodeElement->nodeType){
                                         case ROOT_T:
