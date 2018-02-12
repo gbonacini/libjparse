@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector> 
+#include <map> 
 
 extern "C" {
 #include <jsonParserTypes.h>
@@ -34,27 +35,29 @@ class JsonCppWrap{
 		explicit JsonCppWrap(std::string* jsonFile) ;
 		explicit JsonCppWrap(std::string& jsonFile) ;
 		explicit JsonCppWrap(const char* jsonFile) ;
-		node* getElementValueByPath(const char* elUrl) const noexcept;
-		node* getElementValueByPath(std::string* elUrl) const noexcept;
-		node* getElementValueByPath(std::string& elUrl) const noexcept;
-		node* getElementValueByPathExc(const char* elUrl) const;
-		node* getElementValueByPathExc(std::string* elUrl) const;
-		node* getElementValueByPathExc(std::string& elUrl) const;
-		type getType(node* nodeElement) const noexcept;
-		node* getArrayElements(node* arrayRootElement) const noexcept;
-		node* getArrayOfObjsElements(node* arrayRootElement) const noexcept;
-		node* getElementFromObj(node* object) const noexcept;
-		bool checkPath(std::string* elUrl) const noexcept;
-		bool checkPath(std::string& elUrl) const noexcept;
-		bool checkPath(char const* elUrl) const noexcept;
-		bool checkPathList(std::vector<std::string>& urlList) const noexcept;
-		bool isScalar(node* toCheck) const noexcept;
-		void printNodeValueExc(node* nodeElement) const;
-		int  printNodeValue(node* nodeElement) const;
+		node*    getElementValueByPath(const char* elUrl)                const noexcept;
+		node*    getElementValueByPath(std::string* elUrl)               const noexcept;
+		node*    getElementValueByPath(std::string& elUrl)               const noexcept;
+		node*    getElementValueByPathExc(const char* elUrl)             const;
+		node*    getElementValueByPathExc(std::string* elUrl)            const;
+		node*    getElementValueByPathExc(std::string& elUrl)            const;
+		type     getType(node* nodeElement)                              const noexcept;
+		node*    getArrayElements(node* arrayRootElement)                const noexcept;
+		node*    getArrayOfObjsElements(node* arrayRootElement)          const noexcept;
+		node*    getElementFromObj(node* object)                         const noexcept;
+		bool     checkPath(std::string* elUrl)                           const noexcept;
+		bool     checkPath(std::string& elUrl)                           const noexcept;
+		bool     checkPath(char const* elUrl)                            const noexcept;
+		bool     checkPathList(const std::vector<std::string>& urlList)  const noexcept;
+		bool     checkPathMapValues(const std::map<std::string,
+		                                           std::string>& urlMap) const noexcept;
+		bool     isScalar(node* toCheck)                                 const noexcept;
+		void     printNodeValueExc(node* nodeElement)                    const;
+		int      printNodeValue(node* nodeElement)                       const;
 	private:
-		std::string jsonFilePath;
-		pathIndex* fullIndexesList;
-		node nodeRoot;
+		std::string    jsonFilePath;
+		pathIndex*     fullIndexesList;
+		node           nodeRoot;
 };
 
 

@@ -119,9 +119,18 @@ JsonCppWrap::JsonCppWrap(string& jsonFile)  : JsonCppWrap(jsonFile.c_str()){
 		return checkPath(elUrl.c_str());
 	}
 
-	bool JsonCppWrap::checkPathList(vector<string>& urlList) const noexcept{
+	bool JsonCppWrap::checkPathList(const vector<string>& urlList) const noexcept{
 		for (auto iter : urlList ){
 			if(!checkPath(iter.c_str())){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool JsonCppWrap::checkPathMapValues(const std::map<std::string, std::string>& urlMap) const noexcept{
+		for (auto iter : urlMap ){
+			if(!checkPath(iter.second.c_str())){
 				return false;
 			}
 		}
