@@ -49,8 +49,8 @@ class JsonCppWrap{
 		bool               checkPath(const std::string& elUrl)                         const noexcept(true);
 		bool               checkPath(char const * const elUrl)                         const noexcept(true);
 		bool               checkPathList(const std::vector<std::string>& urlList)      const noexcept(true);
-		bool               checkPathMapValues(const std::map<std::string,
-		                                      std::string>& urlMap)                    const noexcept(true);
+		bool               checkPathMapValues(const std::map<const std::string,
+		                                      const std::string>& urlMap)                    const noexcept(true);
 		bool               isScalar(const node * const toCheck)                        const noexcept(true);
 		void               printNodeValueExc(const node * const nodeElement)           const noexcept(false);
 		int                printNodeValue(const node * const nodeElement)              const noexcept(false);

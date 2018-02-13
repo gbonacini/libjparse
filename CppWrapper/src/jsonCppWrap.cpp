@@ -124,7 +124,7 @@ namespace jsonCppWrap{
 		return true;
 	}
 
-	bool JsonCppWrap::checkPathMapValues(const std::map<std::string, std::string>& urlMap) const noexcept(true){
+	bool JsonCppWrap::checkPathMapValues(const map<const string, const string>& urlMap) const noexcept(true){
 		for (auto iter : urlMap ){
 			if(!checkPath(iter.second.c_str())){
 				return false;
