@@ -46,7 +46,7 @@ namespace jsonCppWrap{
 		}
 	}
 
-	const node * const JsonCppWrap::getElementValueByPath(const char * const elUrl) const noexcept(true){
+	const node* JsonCppWrap::getElementValueByPath(const char * const elUrl) const noexcept(true){
 		pathIndex* element;
 		element = ::getElementValueByString(fullIndexesList, elUrl);
 		if(element==nullptr){
@@ -56,23 +56,23 @@ namespace jsonCppWrap{
 		return element->Node;
 	}
 
-	const node * const JsonCppWrap::getElementValueByPath(const string * const elUrl) const noexcept(true){
+	const node* JsonCppWrap::getElementValueByPath(const string * const elUrl) const noexcept(true){
 		return getElementValueByPath(elUrl->c_str());
 	}
 
-	const node * const JsonCppWrap::getElementValueByPath(const string& elUrl) const noexcept(true){
+	const node* JsonCppWrap::getElementValueByPath(const string& elUrl) const noexcept(true){
 		return getElementValueByPath(elUrl.c_str());
 	}
 	
-	const node * const JsonCppWrap::getElementValueByPathExc(const string * const elUrl) const noexcept(false){
+	const node* JsonCppWrap::getElementValueByPathExc(const string * const elUrl) const noexcept(false){
 		return getElementValueByPathExc(elUrl->c_str());
 	}
 	
-	const node * const JsonCppWrap::getElementValueByPathExc(const string& elUrl) const noexcept(false){
+	const node* JsonCppWrap::getElementValueByPathExc(const string& elUrl) const noexcept(false){
 		return getElementValueByPathExc(elUrl.c_str());
 	}
 
-	const node * const JsonCppWrap::getElementValueByPathExc(const char * const elUrl) const noexcept(false){
+	const node* JsonCppWrap::getElementValueByPathExc(const char * const elUrl) const noexcept(false){
 		pathIndex* element;
 		element = ::getElementValueByString(fullIndexesList, elUrl);
 		if(element==nullptr){
@@ -82,15 +82,15 @@ namespace jsonCppWrap{
 		return element->Node;
 	}
 
-	const node * const JsonCppWrap::getArrayElements(const node * const arrayRootElement) const noexcept(true){
+	const node* JsonCppWrap::getArrayElements(const node * const arrayRootElement) const noexcept(true){
 		return ::getArrayElements(arrayRootElement);
 	}
 
-	const node * const JsonCppWrap::getArrayOfObjsElements(const node * const arrayRootElement) const noexcept(true){
+	const node* JsonCppWrap::getArrayOfObjsElements(const node * const arrayRootElement) const noexcept(true){
 		return ::getArrayOfObjsElements(arrayRootElement);
 	}
 
-	const node * const JsonCppWrap::getElementFromObj(const node * const object) const noexcept(true){
+	const node* JsonCppWrap::getElementFromObj(const node * const object) const noexcept(true){
 		return ::getElementFromObj(object);
 	}
 
