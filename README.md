@@ -9,10 +9,10 @@ It's my intention extend the support at least for AIX.
 build:
 ======
 
- autoreconf -ivf
- ./configure
- make
- make install ( or sudo make install)
+ autoreconf -ivf<BR>
+ ./configure<BR>
+ make<BR>
+ make install ( or sudo make install)<BR>
 
 C++ Wrapper:
 ===========
